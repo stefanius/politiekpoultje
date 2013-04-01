@@ -24,11 +24,7 @@
         echo $Template->loadJavascript('jquery.editinplace.js', URL_CORE_JS);
         echo $Template->loadJavascript('bootstrap.js', URL_CORE_JS);   
         
-        $args['basepath']='core';
-        $args['element']='feedback.php';
-        $args['renderpath']='';  
-        $args['result']=$result;  
-        echo $Template->render($args);  
+
     ?>    
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -46,7 +42,6 @@
 
 
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -58,34 +53,23 @@
           <a class="brand" href="<?php echo URL_BASE ?>"><?php echo APP_NAME ?></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="<?php echo URL_BASE ?>">Home</a></li>
+              
+              <li class=""><a href="<?php echo URL_BASE ?>nieuws/">Nieuws</a></li>
+              <li class=""><a href="<?php echo URL_BASE ?>deelnemers/registreer/">Registreer</a></li>
               <!-- <li><a href="#contact">Contact</a></li>
               <li><a href="#about">About</a></li> -->
-              <li class="dropdown">
+              <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Partij <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="<?php echo URL_BASE ?>partij/add/">Add</a></li>
                   <li><a href="<?php echo URL_BASE ?>partij/index/">Index</a></li>
-                  <!--<li class="divider"></li>
+                  <li class="divider"></li>
                   <li class="nav-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>-->
+                  <li><a href="#">One more separated link</a></li>
                 </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Verkiezing <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="<?php echo URL_BASE ?>verkiezing/add/">Add</a></li>
-                  <li><a href="<?php echo URL_BASE ?>verkiezing/index/">Index</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Auteurs <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="<?php echo URL_BASE ?>auteur/add/">Add</a></li>
-                  <li><a href="<?php echo URL_BASE ?>auteur/index/">Index</a></li>
-                </ul>
-              </li>
+              </li>-->
+
             </ul>
             <?php
                 $args['basepath']='app';
@@ -105,14 +89,32 @@
         <h1>Welkom</h1>
         <h2>Politiek voor iedereen!</h2>
       </div>
-
+      <?php
+        $args['basepath']='core';
+        $args['element']='feedback.php';
+        $args['renderpath']='';  
+        $args['result']=$result;  
+        echo $Template->render($args);      
+      ?>
       <!-- Example row of columns -->
       <div class="row">
         <div class="span2">
           <h2>Heading</h2>
+          
           <p>DEFAULT PAGE</a></p>
+          
         </div>
         <div class="span8">
+           <?php
+             /*   if(isset($feedback)){
+                    $args['basepath']='app';
+                    $args['element']=$feedback;
+                    $args['renderpath']='errorfeedback/';   
+                    $args['message']=$message;
+                    echo $Template->render($args);                   
+                }
+           */
+           ?>
           <p><?php echo $Template->render($View); ?></p>
        </div>
       </div>

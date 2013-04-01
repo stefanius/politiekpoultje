@@ -3,6 +3,7 @@
 require_once(PATH_CFG . 'cfg.application.php'); //app confguration
 require_once(PATH_CFG . 'cfg.base.config.php'); //base configuration
 require_once(PATH_CFG . 'cfg.database.php'); //database config
+require_once(PATH_CFG . 'cfg.mailer.php'); //local mail settings
 require_once(PATH_CFG . 'cfg.routes.php'); //local aditional routes
 require_once(PATH_CORE . 'load' .DS . 'loader.php'); //load core
 

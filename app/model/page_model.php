@@ -4,7 +4,7 @@ class PageModel extends CoreModel{
     var $table = 'contentpages';
     var $displaykey = 'title';
     var $Sections = array();
-    
+   /* 
     public function load($field, $value)
     {     
         $return = parent::load($field, $value);
@@ -22,7 +22,7 @@ class PageModel extends CoreModel{
         }
         
         return $return;
-    }
+    }*/
     
     public function load($field, $value)
     {

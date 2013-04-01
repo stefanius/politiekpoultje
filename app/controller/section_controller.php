@@ -3,7 +3,7 @@
 class SectionController extends AuthController{
     
     function index(){
-        $Partijen = $this->Partij->getList();
+        $Sections = $this->Section->getList();
         $this->render(array('Sections'=> $Sections));       
     }
     
