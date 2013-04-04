@@ -1,5 +1,5 @@
 <?php
-define("DB_HOST", "localhost"); //Hostname
+define("DB_HOST", "185.10.51.80"); //Hostname
 define("DB_BASE", "dev_politiekpoultje"); //Name of the database
 define("DB_USER", "dwivoqfb_aap"); //Username
 define("DB_PSWD", "grootjecms"); //Password
