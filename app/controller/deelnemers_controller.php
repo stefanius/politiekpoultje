@@ -2,7 +2,7 @@
 
 class DeelnemersController extends AuthController{
     function registreer($data=false){
-        if(!$Session->get('User.id')){
+        if(!$this->Registry->Session->get('User.id')){
             $formFields=array('nickname', 'mail', 'password');
             if(!$data){
                 $this->render(array('Deelnemer'=> $this->Deelnemers, 'formFields'=>$formFields));
