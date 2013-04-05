@@ -2,24 +2,28 @@
 
 class DeelnemersController extends AuthController{
     function registreer($data=false){
-        $formFields=array('nickname', 'mail', 'password');
-        if(!$data){
-            $this->render(array('Deelnemer'=> $this->Deelnemers, 'formFields'=>$formFields));
-        }else{
-            $data['validation'] = md5($data['mail']).':'.md5($data['mail'].time().rand().'*');
-            $result = $this->Deelnemers->addnew($data);         
-
-            if($result > 0){
-                $Deelnemer = $this->Deelnemers->load('id', $result); 
-                $link = 'http://politiekpoultje.nl/deelnemers/validate/'.$Deelnemer->mail.'/'.$Deelnemer->created.'/'.$Deelnemer->validation.'/';
-                $Mailer = new Mailer(MAILER_HOST, MAILER_ADDRES, MAILER_PASSWORD, MAILER_PORT, MAILER_FROM);
-                $Mailer->send('U kunt uw account activeren met behulp van de volgende link: <a href="'.$link.'">Activieer!</a>','Politiekpoultje Activatie', $Deelnemer->mail, $Deelnemer->nickname);
-                $this->render(array('view' => 'registerok.php', 'feedback'=>'succes.php'));
+        if(!$Session->get('User.id')){
+            $formFields=array('nickname', 'mail', 'password');
+            if(!$data){
+                $this->render(array('Deelnemer'=> $this->Deelnemers, 'formFields'=>$formFields));
             }else{
-                $message='Gebruikersnaam of email bestaat al. Als u het zelf bent, kunt u het wachtwoord herstellen. Anders kunt u een andere gebruikersnaam kiezen.';
-                $args = array('Deelnemer'=> $this->Deelnemers,'$msgType'=>'error', 'formFields'=>$formFields, 'message'=>$message);
-                $this->render($args);
-            }
+                $data['validation'] = md5($data['mail']).':'.md5($data['mail'].time().rand().'*');
+                $result = $this->Deelnemers->addnew($data);         
+
+                if($result > 0){
+                    $Deelnemer = $this->Deelnemers->load('id', $result); 
+                    $link = 'http://politiekpoultje.nl/deelnemers/validate/'.$Deelnemer->mail.'/'.$Deelnemer->created.'/'.$Deelnemer->validation.'/';
+                    $Mailer = new Mailer(MAILER_HOST, MAILER_ADDRES, MAILER_PASSWORD, MAILER_PORT, MAILER_FROM);
+                    $Mailer->send('U kunt uw account activeren met behulp van de volgende link: <a href="'.$link.'">Activieer!</a>','Politiekpoultje Activatie', $Deelnemer->mail, $Deelnemer->nickname);
+                    $this->render(array('view' => 'registerok.php', 'feedback'=>'succes.php'));
+                }else{
+                    $message='Gebruikersnaam of email bestaat al. Als u het zelf bent, kunt u het wachtwoord herstellen. Anders kunt u een andere gebruikersnaam kiezen.';
+                    $args = array('Deelnemer'=> $this->Deelnemers,'$msgType'=>'error', 'formFields'=>$formFields, 'message'=>$message);
+                    $this->render($args);
+                }
+            }            
+        }else{
+            $this->render(array('view' => 'already.loggedin.php'));
         }
     }
 
