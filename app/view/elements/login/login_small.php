@@ -14,9 +14,8 @@
    else:
 ?>
 
-   <span align="right">Welkom, <?php echo  $Session->get('User.nickname'); ?> <a href="<?php echo $logout ?>"> afmelden</a></span>
    <p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link">Username</a>
+              Ingelogd als <a href="#" class="navbar-link"><?php echo  $Session->get('User.nickname'); ?></a>
             </p>
     
 <?php endif; ?>
