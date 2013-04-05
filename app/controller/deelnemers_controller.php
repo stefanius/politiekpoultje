@@ -2,8 +2,6 @@
 
 class DeelnemersController extends AuthController{
     function registreer($data=false){
-        require_once('C:\wamp\www\core\mailer\mailer.php');
-
         $formFields=array('nickname', 'mail', 'password');
         if(!$data){
             $this->render(array('Deelnemer'=> $this->Deelnemers, 'formFields'=>$formFields));
