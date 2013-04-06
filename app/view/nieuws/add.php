@@ -8,5 +8,29 @@
     </dl>
 </form>
 
+<?php
+    echo $Template->loadJavascript('packages/ckeditor/ckeditor.js', URL_ASSETS);
+?>
 
+<script type="text/javascript">
+    CKEDITOR.replace( 'teaser',
+    {
+        toolbar :
+        [
+                { name: 'basicstyles', items : [ 'Bold','Italic','Underline' ] },
+        ],
+        uiColor : '#9AB8F3'
+    });
+    
+    CKEDITOR.replace( 'content',
+    {
+        toolbar :
+        [
+                { name: 'basicstyles', items : [ 'Bold','Italic','Underline' ] },
+                { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
+                { name: 'tools', items : [ 'Maximize','-','About' ] }
+        ],
+        uiColor : '#9AB8F3'
+    });
+</script>
 

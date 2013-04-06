@@ -17,8 +17,7 @@
         echo $Template->loadStylesheet('jquery-ui-1.9.1.custom.min.css', URL_CORE_CSS);
         echo $Template->loadStylesheet('bootstrap.css', URL_CORE_CSS);
         echo $Template->loadStylesheet('bootstrap-responsive.css', URL_CORE_CSS);
-        
-        echo $Template->loadJavascript('packages/ckeditor/ckeditor.js', URL_CORE_ASSETS);
+            
         echo $Template->loadJavascript('jquery-1.8.2.js', URL_CORE_JS);
         echo $Template->loadJavascript('jquery-ui-1.9.1.custom.min.js', URL_CORE_JS);
         echo $Template->loadJavascript('jquery.editinplace.js', URL_CORE_JS);
