@@ -54,13 +54,21 @@ class DeelnemersController extends AuthController{
         }
     }
     
-    function login($data=false){  
-        $user=parent::login($this->Deelnemers, $data);
-        $this->Registry->Session
-            ->set("User.id",  $user->id)
-            ->set("User.nickname",  $user->nickname)
-            ->set("timestamp", time());
+    function profiel(){
         $this->render();
+    }
+    
+    function login($data=false){
+        if(!$data){
+            $this->render();
+        }else{
+            $user=parent::login($this->Deelnemers, $data);
+            $this->Registry->Session
+                ->set("User.id",  $user->id)
+                ->set("User.nickname",  $user->nickname)
+                ->set("timestamp", time());
+            $this->redirect('deelnemers/profiel');
+        }
     }   
     
     function logout(){
