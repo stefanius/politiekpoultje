@@ -20,15 +20,25 @@ class NieuwsController extends AuthController{
     }
     
     function add($data=false){
+        Loader::loadModel('Deelnemers');
+        $Deelnemers = new DeelnemersModel();
+        $allowAction = false;
+        var_dump($this->checkLogin());
         if($this->checkLogin()){
-            if(!$data){
-                $this->render();
-            }else{
-                $result = $this->Nieuws->addnew($data);
-                $this->render(array('result' => $result));
+            $Deelnemer = $Deelnemers->load('id', $this->Registry->Session->get('User.id')); 
+            if($Deelnemer->isAdmin()){
+                $allowAction=true;
+                if(!$data){
+                    $this->render();
+                }else{
+                    $result = $this->Nieuws->addnew($data);
+                    $this->render(array('result' => $result));
+                }               
             }
-        }else{
-            echo 'qqq';
+        }
+        var_dump($allowAction);
+        if($allowAction===false){
+            $this->redirect('nieuws/');
         }
     } 
    

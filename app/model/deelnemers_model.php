@@ -14,6 +14,10 @@ class DeelnemersModel extends AuthModel{
                     'password' =>array( 'data-validation'=>'empty', 
                                         'data-error'=>'Wachwoord verplicht',
                                         'caption'=>'Wachtwoord'));
+    
+    public function isAdmin(){
+        return ($this->admin === 1 || $this->admin === '1');
+    }
 }
 
 ?>
