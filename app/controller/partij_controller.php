@@ -15,17 +15,41 @@ class PartijController extends AuthController{
     }
     
     function add($data=false){
-        Loader::loadModel('Page');
-        $Page = new PageModel();
-        $Pages = $Page->getList();
+        Loader::loadModel('Deelnemers');
+        $Deelnemers = new DeelnemersModel();
+        $allowAction = false;
         if($this->checkLogin()){
-            if(!$data){
-                $this->render(array('Pages'=>$Pages));
-            }else{
-                $data['user_id'] = $this->Registry->Session->get("User.id");
-                $result = $this->Partij->addnew($data);
-                $this->render(array('result' => $result));
+            $Deelnemer = $Deelnemers->load('id', $this->Registry->Session->get('User.id')); 
+            if($Deelnemer->isAdmin()){
+                $allowAction=true;
+                if(!$data){
+                    $this->render(array('Partij'=> $this->Partij));
+                }else{                 
+                    Loader::loadHelper('String');
+                    $data['urlpart'] = StringHelper::urlpart($data['naam']);
+                    $data['naam_kort'] = strtoupper($data['naam_kort']);
+                    $data['user_id'] = $Deelnemer->id;
+                    $result = $this->Partij->addnew($data);
+                    if($result > 0){
+                        $message=   'Partij "'.$data['naam'].'" ('.$data['naam_kort'].') is succesvol 
+                                    opgeslagen. U kunt hieronder een nieuwe partij toevoegen of het 
+                                    naar het <a href="/partij/'.$data['urlpart'].'/">profiel</a>';
+                        $msgType='success';
+                    }else{
+                        $message=   'Partij "'.$data['naam'].'" ('.$data['naam_kort'].') is niet 
+                                    opgeslagen. Waarschijnlijk bestaat deze partij al in onze database
+                                    of is er een technisch probleem met onze website/database. 
+                                    Controleer de naam van de partij en of deze al bestaat. Als dit 
+                                    probleem blijft voordoen neemt u dan contact op met onze helpdesk.';                            
+                        $msgType='error';                     
+                    }                  
+                    $args = array('Partij'=> $this->Partij,'msgType'=>$msgType, 'message'=>$message);
+                    $this->render($args);                    
+                }               
             }
+        }
+        if($allowAction===false){
+            $this->redirect('partij/');
         }
     } 
    
