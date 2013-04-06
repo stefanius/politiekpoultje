@@ -54,7 +54,9 @@
             <ul class="nav">
               
               <li class=""><a href="<?php echo URL_BASE ?>nieuws/">Nieuws</a></li>
-              <li class=""><a href="<?php echo URL_BASE ?>deelnemers/registreer/">Registreer</a></li>
+              <?php if(!$Session->get('User.id')): ?>
+                <li class=""><a href="<?php echo URL_BASE ?>deelnemers/registreer/">Registreer</a></li>
+              <?php endif; ?>
               <!-- <li><a href="#contact">Contact</a></li>
               <li><a href="#about">About</a></li> -->
               <!--<li class="dropdown">
