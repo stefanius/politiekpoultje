@@ -31,7 +31,11 @@ class NieuwsController extends AuthController{
                     $this->render();
                 }else{;                 
                     Loader::loadHelper('String');
-                    $data['urlpart'] = StringHelper::urlpart($data['titel']);
+                    if(strlen($data['urlpart']) < 2){
+                        $data['urlpart'] = StringHelper::urlpart($data['titel']);
+                    }else{
+                        $data['urlpart'] = StringHelper::urlpart($data['urlpart']);
+                    }
                     $result = $this->Nieuws->addnew($data);
                     $this->render(array('result' => $result));
                 }               
