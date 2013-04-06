@@ -1,11 +1,26 @@
 <?php
 
 class PartijController extends AuthController{
-    
-    function index(){
-        $Partijen = $this->Partij->getList();
-        $this->render(array('Partijen'=> $Partijen));       
+
+    function index($urlpart=false){
+        if(!$urlpart){
+            $Partijen = $this->Partij->getList();
+            $this->render(array('Partijen'=> $Partijen));              
+        }else{
+            $Partij = $this->Partij->load('urlpart', $urlpart);
+            if($Party ==! false){
+                $this->render(array('Partij' => $this->Partij, 'view'=>'view.php'));
+            }else{
+                $message=   'Er is geen partij gevonden met de opgegeven zoekcriteria.';                            
+                $msgType='error';  
+                $Partijen = $this->Partij->getList();
+                $this->render(array('Partijen'=> $Partijen, 'view'=>'index.php','msgType'=>$msgType, 'message'=>$message));
+            }
+              
+        }
+      
     }
+
     
     function view($id=false){
         if($id !== false){

@@ -20,6 +20,7 @@ class PartijModel extends CoreModel{
                                         'data-error'=>'Oprichtingsdatum verplciht',
                                         'caption'=>'Oprichtingtingsdatum',
                                         'fieldtype'=>'string'));        
+    /*
     public function load($field, $value)
     {     
         $return = parent::load($field, $value);
@@ -35,7 +36,7 @@ class PartijModel extends CoreModel{
         }
         
         return $return;
-    }
+    }*/
 }
 
 ?>
